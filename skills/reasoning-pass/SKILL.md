@@ -1,9 +1,8 @@
 ---
 name: reasoning-pass
 description: |
-  Generic reasoning pass skill for ad-hoc validation of artifacts. For software factory
-  workflow steps, use the specialized sf-reasoning-* skills instead. This skill serves
-  as the base pattern and fallback for non-workflow reasoning needs.
+  Generic reasoning pass skill for ad-hoc validation of artifacts.
+  This skill serves as the base pattern and fallback for reasoning needs.
 license: MIT
 compatibility: pi-agent
 ---
@@ -29,7 +28,7 @@ Read the full artifact. Classify as:
 2. **Contradiction check**: Do any items conflict with each other?
 3. **Reference completeness**: Are referenced files/docs/IDs present?
 
-Assign confidence (0.0-1.0). If >= 0.8, proceed. If < 0.8, continue to loop.
+Assign confidence (0.0-1.0). If >= 0.95, proceed. If < 0.95, continue to loop.
 
 ### Step 2b: Full Pass (Complex)
 
@@ -40,7 +39,7 @@ Break into sub-problems with:
 - Confidence score (0.0-1.0)
 
 #### SOLVE
-For each sub-problem with confidence < 0.8:
+For each sub-problem with confidence < 0.95:
 - Identify what is missing, ambiguous, or contradictory
 - Note specific items involved
 
@@ -62,8 +61,8 @@ Attempt auto-resolution from context. Present proposals to human:
 2. Ask exactly **one** targeted question
 3. Wait for response
 4. Re-run reasoning loop, overwrite output
-5. If confidence >= 0.8, proceed
-6. If still < 0.8, offer choice:
+5. If confidence >= 0.95, proceed
+6. If still < 0.95, offer choice:
    > "Confidence is [score]. Continue resolving or proceed anyway?"
 
 **Human can say "skip" at any point.**
